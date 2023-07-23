@@ -1,0 +1,55 @@
+{
+  /* 
+        // <ReactPlayer
+        //   url="http://localhost:3000/video/obs.m3u8"
+        //   url="http://172.23.4.80/live/obs.m3u8"
+        //   autoPlay={true}
+        //   controls={true}
+        //   width="auto"
+        //   Height="auto"
+        // />
+       */
+}
+
+// var hls = new Hls();
+// var video = document.getElementById("stream");
+// //var stream_key = "[get-user-stream-key]";
+
+// hls.loadSource("http://172.23.4.80:8080/live/obs.m3u8");
+// hls.attachMedia(video);
+// hls.on(Hls.Events.MANIFEST_PARSED, function () {
+//   video.play();
+// });
+
+class VideoPlayer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.videoRef = React.createRef();
+  }
+  componentDidMount() {
+    const options = {
+      autoplay: true,
+      controls: true,
+      sources: [
+        {
+          src: 'http://172.23.4.80:8080/live/obs"',
+          type: "application/x-mpegURL",
+        },
+      ],
+    };
+    this.player = videojs(this.videoRef.current, options);
+    this.player.hlsQualitySelector();
+  }
+  componentWillUnmount() {
+    if (this.player) {
+      this.player.dispose();
+    }
+  }
+  render() {
+    return (
+      <div data-vjs-player>
+        <video ref={this.videoRef} className="video-js"></video>
+      </div>
+    );
+  }
+}
