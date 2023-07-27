@@ -13,7 +13,6 @@ const App = () => {
       <div className="navbar">
         <Navbar
           color="light"
-          light
           expand="xs"
           className="border-bottom border-gray bg-white"
           style={{ height: 80 }}
