@@ -5,11 +5,11 @@ import ImageData from "./ImageData";
 
 const Home = () => {
   const slides = [
-    { url: "http://localhost:3000/images/image1.png", title: "Image 1" },
-    { url: "http://localhost:3000/images/image2.png", title: "Image 2" },
-    { url: "http://localhost:3000/images/image3.png", title: "Image 3" },
-    { url: "http://localhost:3000/images/image4.png", title: "Image 4" },
-    { url: "http://localhost:3000/images/image5.png", title: "Image 5" },
+    { url: "http://localhost:3001/images/image1.png", title: "Image 1" },
+    { url: "http://localhost:3001/images/image2.png", title: "Image 2" },
+    { url: "http://localhost:3001/images/image3.png", title: "Image 3" },
+    { url: "http://localhost:3001/images/image4.png", title: "Image 4" },
+    { url: "http://localhost:3001/images/image5.png", title: "Image 5" },
   ];
 
   const containerStyles = {
