@@ -13,7 +13,7 @@ class ImageData extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:3500/data")
+    fetch("http://172.23.4.80:3500/data")
       .then((response) => response.json())
       .then(
         (result) => {
