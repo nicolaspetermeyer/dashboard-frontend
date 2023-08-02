@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "../App.css";
 import ImageSlider from "./ImageSlider";
 import { getId, websocketRequest, droneGetCoordinates } from "./functions";
-require ws = require("ws");
 
 const Home = () => {
   const [slides, setSlides] = useState([]);
