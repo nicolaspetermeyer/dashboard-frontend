@@ -1,43 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
 import ImageSlider from "./ImageSlider";
-import ImageData from "./ImageData";
-
-async function getId() {
-  try {
-    const response = await fetch("http://localhost:3500/data");
-    if (!response.ok) {
-      throw Error(response.statusText);
-    }
-
-    const data = await response.json();
-    const last5data = data.slice(-5);
-    const ids = last5data.map((last5data) => last5data._id);
-    const detectionsData = last5data.map((item) => {
-      const detections = item.detections.map((detection) => ({
-        box: detection.box,
-        confidence: detection.confidence,
-        label_name: detection.label_name,
-        tracking_id: detection.tracking_id,
-      }));
-
-      return detections;
-    });
-    console.log("detectionsData:", detectionsData);
-
-    const publicFolderPath = "http://localhost:3001/images/";
-    const slides = ids.map((id, index) => ({
-      url: `${publicFolderPath}${id}`,
-      title: `Image ${index + 1}`,
-      detections: detectionsData[index],
-    }));
-
-    return slides;
-  } catch (error) {
-    console.log(error);
-    return [];
-  }
-}
+import { getId, websocketRequest, droneGetCoordinates } from "./functions";
+require ws = require("ws");
 
 const Home = () => {
   const [slides, setSlides] = useState([]);
@@ -66,9 +31,26 @@ const Home = () => {
         (console.log("test: ", slides), // test print of data
         (
           <div className="float-container">
-            {/* <div className="float-child-message">
-              <ImageData />
-            </div> */}
+            <button
+              onClick={() => {
+                droneGetCoordinates()
+                  .then((coordinates) => {
+                    if (Object.keys(coordinates).length === 0) {
+                      console.error("Did not receive a success message.");
+                    } else {
+                      console.log("Received the new coordinates:", coordinates);
+                      // Here, you can perform further actions with the received coordinates.
+                    }
+                  })
+                  .catch((error) => {
+                    console.error("Error:", error);
+                  });
+              }}
+              title="Picture"
+              color="blue"
+              Test
+            ></button>
+
             <div className="float-child-image" style={containerStyles}>
               <ImageSlider slides={slides} />
             </div>
