@@ -4,7 +4,6 @@ import { Routes, Route, Link } from "react-router-dom";
 import Home from "./components/Home";
 import Stream from "./components/Stream";
 import { Navbar } from "react-bootstrap";
-import DatasList from "./features/data/DatasList";
 
 const App = () => {
   return (
@@ -22,9 +21,6 @@ const App = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/data">Data</Link>
-            </li>
-            <li>
               <Link to="/stream">Stream</Link>
             </li>
           </ul>
@@ -32,9 +28,6 @@ const App = () => {
       </div>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/data">
-          <Route index element={<DatasList />} />
-        </Route>
         <Route path="/stream" element={<Stream />} />
       </Routes>
     </div>

@@ -20,7 +20,8 @@ async function getId() {
     });
     console.log("detectionsData:", detectionsData);
 
-    const publicFolderPath = "http://localhost:3001/images/";
+    const publicFolderPath = "http://172.23.4.80/share/predict_output/";
+
     const slides = ids.map((id, index) => ({
       url: `${publicFolderPath}${id}`,
       title: `Image ${index + 1}`,
@@ -34,8 +35,6 @@ async function getId() {
   }
 }
 
-const WebSocket = require("ws");
-
 function websocketRequest(data = {}) {
   // Preparing the connection
   const dictResponse = {};
@@ -45,7 +44,7 @@ function websocketRequest(data = {}) {
       const url = "ws://172.23.4.80:8766";
       const ws = new WebSocket(url);
 
-      ws.on("open", () => {
+      ws.onopen = () => {
         if (Object.keys(data).length === 0) {
           // Send HANDSHAKE data
           const sendData = JSON.stringify({
@@ -85,13 +84,13 @@ function websocketRequest(data = {}) {
             }
           });
         }
-      });
+      };
 
-      ws.on("error", (error) => {
+      ws.onerror = (error) => {
         console.error(`An error has occurred: ${error}`);
         ws.close();
         resolve(dictResponse);
-      });
+      };
     } catch (error) {
       console.error(`An error has occurred: ${error}`);
       resolve(dictResponse);
@@ -103,7 +102,7 @@ function droneGetCoordinates() {
   // Prepare WebSocket connection
   const url = "ws://172.23.4.80:8766";
   const dictData = {
-    sender: "FRONTEND",
+    sender: "PYTHON",
     to: "DRONE",
     type: "get",
     method: "getCoordinates",
