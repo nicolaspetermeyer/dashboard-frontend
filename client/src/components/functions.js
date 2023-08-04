@@ -1,6 +1,6 @@
 async function getId() {
   try {
-    const response = await fetch("http://localhost:3500/data");
+    const response = await fetch("http://172.23.4.80:3500/data");
     if (!response.ok) {
       throw Error(response.statusText);
     }
