@@ -3,6 +3,10 @@ import "../App.css";
 import ImageSlider from "./ImageSlider";
 import { getId, websocketRequest, droneGetCoordinates } from "./functions";
 
+
+getId()
+
+
 const Home = () => {
   const [slides, setSlides] = useState([]);
 
