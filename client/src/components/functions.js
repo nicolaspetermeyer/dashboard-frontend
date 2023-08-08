@@ -1,14 +1,14 @@
 async function getId() {
   try {
-    const response = await fetch("http://172.23.4.80/data");
+    const response = await fetch("http://localhost:3500/data");
     if (!response.ok) {
       throw Error(response.statusText);
     }
 
     const data = await response.json();
-    const last5data = data.slice(-5);
-    const ids = last5data.map((last5data) => last5data._id);
-    const detectionsData = last5data.map((item) => {
+    const lastimg = data.slice(-20);
+    const ids = lastimg.map((lastimg) => lastimg._id);
+    const detectionsData = lastimg.map((item) => {
       const detections = item.detections.map((detection) => ({
         box: detection.box,
         confidence: detection.confidence,
@@ -102,7 +102,7 @@ function droneGetCoordinates() {
   // Prepare WebSocket connection
   const url = "ws://172.23.4.80:8766";
   const dictData = {
-    sender: "PYTHON",
+    sender: "FRONTEND",
     to: "DRONE",
     type: "get",
     method: "getCoordinates",
@@ -131,6 +131,7 @@ function droneGetCoordinates() {
       // Transform JSON string to JavaScript object
       try {
         const dictResponse = JSON.parse(event.data);
+        console.log("Received data:", dictResponse);
 
         // Test data for debugging purposes
         if (
