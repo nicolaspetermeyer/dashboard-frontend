@@ -6,7 +6,7 @@ async function getId() {
     }
 
     const data = await response.json();
-    const lastimg = data.slice(-10);
+    const lastimg = data.slice(-5);
     const ids = lastimg.map((lastimg) => lastimg._id);
     const detectionsData = lastimg.map((item) => {
       const detections = item.detections.map((detection) => ({
