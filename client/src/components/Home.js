@@ -22,17 +22,13 @@ const Home = () => {
   }, []);
 
   const containerStyles = {
-    width: "825px",
-    height: "462px",
+    width: "700px",
+    height: "420px",
   };
 
   return (
     <div className="float-container">
-      {slides.length === 0 ? (
-        <p>Loading...</p>
-      ) : (
-        <div className="float-child-message">
-          <button
+      <button
             onClick={() => {
               droneGetCoordinates()
                 .then((coordinates) => {
@@ -72,8 +68,16 @@ const Home = () => {
           >
             Connect WebSocket
           </button>
+      {slides.length === 0 ? (
+        <p>Loading...</p>
+      ) : (
+        <div>
+        <div className="float-child-message">
+          
           <MessageFeed></MessageFeed>
-          <div className="float-child-image" style={containerStyles}>
+          
+        </div>
+        <div className="float-child-image" style={containerStyles}>
             <ImageSlider slides={slides} />
           </div>
         </div>

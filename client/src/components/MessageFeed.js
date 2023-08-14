@@ -40,6 +40,10 @@ const sendMessage = async () => {
 
 useEffect(() => {
   fetchMessages();
+
+  const interval = setInterval(fetchMessages, 10000);
+
+  return () => clearInterval(interval)
 }, []);
 
 return (
@@ -52,6 +56,7 @@ return (
           placeholder="Enter your message"
         />
         <button onClick={sendMessage}>Send Message</button>
+        <button onClick={fetchMessages}> Reload Messages</button>
       </div>
       <div>
         <h2>Message Feed</h2>

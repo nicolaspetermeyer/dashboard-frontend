@@ -20,9 +20,9 @@ const App = () => {
             <li>
               <Link to="/">Home</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/stream">Stream</Link>
-            </li>
+            </li> */}
           </ul>
         </Navbar>
       </div>

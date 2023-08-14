@@ -14,13 +14,26 @@ ul {
   list-style: none;
 }
 
-button {
-  background-color: #ffffff;
-  padding: 25px 75px;
-  margin: 50px;
+#button {
+  
+  width: 24px;
+  margin: 10px auto;
+  padding: 7px 13px;
+  text-align: center;
+  background: #ffffff;
   border: solid #000000 1px;
-  cursor: pointer;
-  border-radius: 5px;
+  display: block;
+  
+}
+
+#button:active {
+  vertical-align: top;
+  padding: 8px 13px 6px;
+}
+
+.button:hover {
+  background-color: grey;
+  color: white;
 }
 
 .message-container {
@@ -42,6 +55,7 @@ button {
 
 .float-child-image {
   margin: auto;
+  float: right
 }
 
 .player {

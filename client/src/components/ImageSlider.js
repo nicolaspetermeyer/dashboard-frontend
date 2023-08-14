@@ -72,11 +72,13 @@ const ImageSlider = ({ slides }) => {
       <div style={slideStyles}></div>
 
       <div style={infoContainerStyles}>
-        <p>Label: {slides[currentIndex].url}</p>
-        <p>Label_name: {slides[currentIndex].detections[0].label_name}</p>
-        <p>Confidence: {slides[currentIndex].detections[0].confidence}</p>
-        <p>Tracking ID: {slides[currentIndex].detections[0].tracking_id}</p>
-        <p>Box: {slides[currentIndex].detections[0].box.join(", ")}</p>
+      <p>Label: {slides[currentIndex].url}</p>
+        {slides[currentIndex].detections.map((detection, index) => (
+          <div key = {index}>
+            Label: {detection.label_name}, Tracking ID: {detection.tracking_id}, Confidence: {detection.confidence}
+            </div>
+        ))}
+       
       </div>
     </div>
   );
