@@ -57,7 +57,10 @@ return (
         <h2>Message Feed</h2>
         <ul>
           {messages.map((msg) => (
-            <li key={msg.id}>{msg.content}</li>
+            <li key={msg.id}>
+              <p>{msg.content}</p>
+              <small>{new Date(msg.timestamp).toLocaleString()}</small>
+              </li>
           ))}
         </ul>
       </div>

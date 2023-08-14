@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
 import ImageSlider from "./ImageSlider";
+import MessageFeed from "./MessageFeed";
 import { getId, websocketRequest, droneGetCoordinates } from "./functions";
 
 
@@ -26,11 +27,11 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className="float-container">
       {slides.length === 0 ? (
         <p>Loading...</p>
       ) : (
-        <div className="float-container">
+        <div className="float-child-message">
           <button
             onClick={() => {
               droneGetCoordinates()
@@ -71,7 +72,7 @@ const Home = () => {
           >
             Connect WebSocket
           </button>
-
+          <MessageFeed></MessageFeed>
           <div className="float-child-image" style={containerStyles}>
             <ImageSlider slides={slides} />
           </div>
