@@ -22,10 +22,24 @@ const Overview = () => {
 
   return (
     <div className="overview">
-      {/* <ImageSlider slides={favorites}/> */}
-      <button onClick={fetchFavorite}>Test</button>
+      <button onClick={fetchFavorite}>Fetch Favorites</button>
+
+      <div className="image-list">
+        {favorites.map((favorite) => (
+          <img
+            key={favorite.id} // Assuming each favorite has an 'id' property
+            src={favorite.url}
+            alt={`Favorite ${favorite.id}`}
+            className="favorite-image"
+          />
+        ))}
+      </div>
     </div>
   );
 };
 
 export default Overview;
+
+
+
+

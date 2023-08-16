@@ -4,7 +4,6 @@ const ImageSlider = ({ slides }) => {
   const [currentIndex, setCurrentIndex] = useState(slides.length - 1);
   const [favorite, setFavorite] = useState('');
   const [favorites, setFavorites] = useState([]);
-  console.log(slides)
 
   const sliderStyles = {
     height: "100%",
@@ -29,18 +28,14 @@ const ImageSlider = ({ slides }) => {
 
   const sendFavorite = async () => {
     try {
-      const requestBody = { url: slides[currentIndex] };
-    console.log('Request Body:', requestBody); // Log the request body
       const response = await fetch('http://172.23.4.80/api/favorite', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ url: slides[currentIndex] })
+        body: JSON.stringify({ url: slides[currentIndex].url })
       });
-      
-      console.log(response)
-  
+        
       if (response.ok) {
         if (response.status !== 204) {
         const newFavorite = await response.json();
