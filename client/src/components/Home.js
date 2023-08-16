@@ -4,10 +4,6 @@ import ImageSlider from "./ImageSlider";
 import MessageFeed from "./MessageFeed";
 import { getId, websocketRequest, droneGetCoordinates } from "./functions";
 
-
-getId()
-
-
 const Home = () => {
   const [slides, setSlides] = useState([]);
 
@@ -28,6 +24,7 @@ const Home = () => {
 
   return (
     <div className="float-container">
+      <div>
       {/* <button
             onClick={() => {
               droneGetCoordinates()
@@ -68,6 +65,7 @@ const Home = () => {
           >
             Connect WebSocket
           </button> */}
+          </div>
       {slides.length === 0 ? (
         <p>Loading...</p>
       ) : (
@@ -78,6 +76,7 @@ const Home = () => {
           
         </div>
         <div className="float-child-image" style={containerStyles}>
+
             <ImageSlider slides={slides} />
           </div>
         </div>

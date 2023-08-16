@@ -6,8 +6,9 @@ h1 {
 
 h2 {
   font-size: 1.5em;
-  text-align: center;
+  text-align: left;
   color: #000000;
+  padding-top: 20px;
 }
 
 ul {
@@ -51,6 +52,7 @@ ul {
   width: 30%;
   float: left;
   padding: 20px;
+  border: 3px solid black;
 }
 
 .float-child-image {

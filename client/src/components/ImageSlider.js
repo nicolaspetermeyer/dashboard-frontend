@@ -1,8 +1,10 @@
 import { useState } from "react";
 
 const ImageSlider = ({ slides }) => {
-  console.log("slides:", slides);
   const [currentIndex, setCurrentIndex] = useState(slides.length - 1);
+  const [favorite, setFavorite] = useState('');
+  const [favorites, setFavorites] = useState([]);
+  console.log(slides)
 
   const sliderStyles = {
     height: "100%",
@@ -15,7 +17,7 @@ const ImageSlider = ({ slides }) => {
     borderRadius: "0px",
     backgroundPosition: "center",
     backgroundSize: "cover",
-    backgroundImage: `url(${slides[currentIndex].url})`,
+    backgroundImage: `url(${slides.length > 0 ? slides[currentIndex].url: ''})`,
   };
 
   const infoContainerStyles = {
@@ -24,6 +26,39 @@ const ImageSlider = ({ slides }) => {
     padding: "10px", // Optional padding for the information container
     borderRadius: "5px", // Optional border radius for the information container
   };
+
+  const sendFavorite = async () => {
+    try {
+      const requestBody = { url: slides[currentIndex] };
+    console.log('Request Body:', requestBody); // Log the request body
+      const response = await fetch('http://172.23.4.80/api/favorite', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ url: slides[currentIndex] })
+      });
+      
+      console.log(response)
+  
+      if (response.ok) {
+        if (response.status !== 204) {
+        const newFavorite = await response.json();
+        setFavorites([...favorites, newFavorite]);
+        setFavorite('');
+      } else {
+        console.log('Favorite added successfully'); // Handle empty response
+      }
+       console.log(favorites);
+
+      } else {
+        console.error('Error sending favorite:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error sending favorite:', error);
+    }
+  };
+  
 
   const leftArrowStyles = {
     position: "absolute",
@@ -74,7 +109,7 @@ const ImageSlider = ({ slides }) => {
 
       <div style={infoContainerStyles}>
       <p>Image ID: {currentIndex}</p>
-      {/* <p>URL: {slides[currentIndex].url}</p> */}
+      <p>URL: {slides[currentIndex].url}</p>
         {slides[currentIndex]?.detections ? (
         slides[currentIndex].detections.map((detection, index) => (
           <div key = {index}>
@@ -86,6 +121,7 @@ const ImageSlider = ({ slides }) => {
       )}
        
       </div>
+      <button onClick={sendFavorite}>Favorite</button>
     </div>
   );
 };

@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { Routes, Route, Link } from "react-router-dom";
 import Home from "./components/Home";
-import Stream from "./components/Stream";
+import Overview from "./components/Overview";
 import { Navbar } from "react-bootstrap";
 
 const App = () => {
@@ -20,15 +20,15 @@ const App = () => {
             <li>
               <Link to="/">Home</Link>
             </li>
-            {/* <li>
-              <Link to="/stream">Stream</Link>
-            </li> */}
+            <li>
+              <Link to="/overview">Overview</Link>
+            </li>
           </ul>
         </Navbar>
       </div>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/stream" element={<Stream />} />
+        <Route path="/overview" element={<Overview />} />
       </Routes>
     </div>
   );

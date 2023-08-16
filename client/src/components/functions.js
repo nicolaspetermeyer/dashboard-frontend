@@ -7,7 +7,6 @@ async function getId() {
 
     const data = await response.json();
     
-    console.log("data: ", data)
     
     const lastimg = data.slice(-100);
     //const ids = lastimg.map((lastimg) => lastimg._id);
@@ -22,7 +21,6 @@ async function getId() {
 
       return detections;
     });
-    console.log("detectionsData:", detectionsData);
 
     const publicFolderPath = "http://172.23.4.80/share/predict_output/";
 
