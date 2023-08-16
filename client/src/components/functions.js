@@ -9,9 +9,10 @@ async function getId() {
     
     console.log("data: ", data)
     
-    const lastimg = data.slice(-5);
-    const ids = lastimg.map((lastimg) => lastimg._id);
-    const detectionsData = lastimg.map((item) => {
+    const lastimg = data.slice(-100);
+    //const ids = lastimg.map((lastimg) => lastimg._id);
+    const ids = data.map((data) => data._id)
+    const detectionsData = data.map((item) => {
       const detections = item.detections.map((detection) => ({
         box: detection.box,
         confidence: detection.confidence, 

@@ -28,7 +28,7 @@ const Home = () => {
 
   return (
     <div className="float-container">
-      <button
+      {/* <button
             onClick={() => {
               droneGetCoordinates()
                 .then((coordinates) => {
@@ -67,7 +67,7 @@ const Home = () => {
             color="blue"
           >
             Connect WebSocket
-          </button>
+          </button> */}
       {slides.length === 0 ? (
         <p>Loading...</p>
       ) : (

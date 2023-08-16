@@ -1,7 +1,8 @@
 import { useState } from "react";
 
 const ImageSlider = ({ slides }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  console.log("slides:", slides);
+  const [currentIndex, setCurrentIndex] = useState(slides.length - 1);
 
   const sliderStyles = {
     height: "100%",
@@ -72,12 +73,17 @@ const ImageSlider = ({ slides }) => {
       <div style={slideStyles}></div>
 
       <div style={infoContainerStyles}>
-      <p>Label: {slides[currentIndex].url}</p>
-        {slides[currentIndex].detections.map((detection, index) => (
+      <p>Image ID: {currentIndex}</p>
+      {/* <p>URL: {slides[currentIndex].url}</p> */}
+        {slides[currentIndex]?.detections ? (
+        slides[currentIndex].detections.map((detection, index) => (
           <div key = {index}>
             Label: {detection.label_name}, Tracking ID: {detection.tracking_id}, Confidence: {detection.confidence}
             </div>
-        ))}
+        ))
+        ) : (
+          <p>Keine Objekte verfügbar zu diesem Bild.</p>
+      )}
        
       </div>
     </div>

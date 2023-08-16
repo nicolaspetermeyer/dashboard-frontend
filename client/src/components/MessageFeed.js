@@ -55,7 +55,7 @@ return (
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Enter your message"
         />
-        <button onClick={sendMessage}>Send Message</button>
+        {/* <button onClick={sendMessage}>Send Message</button> */}
         <button onClick={fetchMessages}> Reload Messages</button>
       </div>
       <div>
