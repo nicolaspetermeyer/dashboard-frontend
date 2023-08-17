@@ -74,7 +74,6 @@ return (
           placeholder="Enter your message"
         /> */}
         {/* <button onClick={sendMessage}>Send Message</button> */}
-        <button onClick={fetchMessages}> Reload Messages</button>
         <button onClick={clearMessages}> Clear Messages</button>
       </div>
       <div>

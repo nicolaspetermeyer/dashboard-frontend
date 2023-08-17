@@ -9,6 +9,10 @@ const Home = () => {
 
   useEffect(() => {
     loadSlides();
+
+    const intervalId = setInterval(loadSlides, 4000);
+    
+    return () => clearInterval(intervalId);
   }, []);
 
   const loadSlides = () => {
@@ -19,16 +23,21 @@ const Home = () => {
       .catch((error) => {
         console.error("Error:", error);
       });
+      console.log("test")
   };
 
   const containerStyles = {
     width: "700px",
     height: "420px",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
   };
+ 
 
   return (
     <div className="float-container">
-      <div>
+      
       {/* <button
             onClick={() => {
               droneGetCoordinates()
@@ -69,7 +78,7 @@ const Home = () => {
           >
             Connect WebSocket
           </button> */}
-          </div>
+          
       {slides.length === 0 ? (
         <p>Loading...</p>
       ) : (
