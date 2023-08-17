@@ -8,14 +8,18 @@ const Home = () => {
   const [slides, setSlides] = useState([]);
 
   useEffect(() => {
+    loadSlides();
+  }, []);
+
+  const loadSlides = () => {
     getId()
-      .then((slides) => {
-        setSlides(slides);
+      .then((data) => {
+        setSlides(data);
       })
       .catch((error) => {
         console.error("Error:", error);
       });
-  }, []);
+  };
 
   const containerStyles = {
     width: "700px",
@@ -70,15 +74,20 @@ const Home = () => {
         <p>Loading...</p>
       ) : (
         <div>
+          {/* <div className ="Buttons">
+          <button onClick={handleReload}>Reload ImageSlider</button>
+            </div> */}
         <div className="float-child-message">
-          
+        
           <MessageFeed></MessageFeed>
           
         </div>
         <div className="float-child-image" style={containerStyles}>
 
             <ImageSlider slides={slides} />
+            
           </div>
+          
         </div>
       )}
     </div>

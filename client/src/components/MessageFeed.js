@@ -67,13 +67,13 @@ useEffect(() => {
 return (
     <div>
       <div>
-        <input
+        {/* <input
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Enter your message"
-        />
-        <button onClick={sendMessage}>Send Message</button>
+        /> */}
+        {/* <button onClick={sendMessage}>Send Message</button> */}
         <button onClick={fetchMessages}> Reload Messages</button>
         <button onClick={clearMessages}> Clear Messages</button>
       </div>

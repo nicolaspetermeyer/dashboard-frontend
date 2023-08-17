@@ -20,9 +20,13 @@ const Overview = () => {
     }
   };
 
+  useEffect(() => {
+    fetchFavorite();
+  }, []);
+
   return (
     <div className="overview">
-      <button onClick={fetchFavorite}>Fetch Favorites</button>
+      {/* <button onClick={fetchFavorite}>Fetch Favorites</button> */}
 
       <div className="image-list">
         {favorites.map((favorite) => (

@@ -54,7 +54,6 @@ const ImageSlider = ({ slides }) => {
     }
   };
   
-
   const leftArrowStyles = {
     position: "absolute",
     top: "50%",
@@ -92,6 +91,7 @@ const ImageSlider = ({ slides }) => {
       setCurrentIndex(currentIndex + 1);
     }
   };
+
   return (
     <div style={sliderStyles}>
       <div style={leftArrowStyles} onClick={goToPrevious}>
