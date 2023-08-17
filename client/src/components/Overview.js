@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
 import MessageFeed from "./MessageFeed";
-import ImageSlider from "./ImageSlider";
-import { getId } from "./functions";
 
 const Overview = () => {
   const [favorites, setFavorites] = useState([]);

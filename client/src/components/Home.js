@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../App.css";
 import ImageSlider from "./ImageSlider";
 import MessageFeed from "./MessageFeed";
-import { getId, websocketRequest, droneGetCoordinates } from "./functions";
+import { getId } from "./functions";
 
 const Home = () => {
   const [slides, setSlides] = useState([]);
@@ -10,7 +10,7 @@ const Home = () => {
   useEffect(() => {
     loadSlides();
 
-    const intervalId = setInterval(loadSlides, 4000);
+    const intervalId = setInterval(loadSlides, 2000);
     
     return () => clearInterval(intervalId);
   }, []);
@@ -83,9 +83,9 @@ const Home = () => {
         <p>Loading...</p>
       ) : (
         <div>
-          {/* <div className ="Buttons">
-          <button onClick={handleReload}>Reload ImageSlider</button>
-            </div> */}
+            {/* <div className ="Buttons">
+            <button onClick={handleReload}>Reload ImageSlider</button>
+              </div> */}
         <div className="float-child-message">
         
           <MessageFeed></MessageFeed>
