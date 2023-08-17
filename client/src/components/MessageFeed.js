@@ -59,7 +59,7 @@ const clearMessages = async () => {
 useEffect(() => {
   fetchMessages();
 
-  const interval = setInterval(fetchMessages, 10000);
+  const interval = setInterval(fetchMessages, 2000);
 
   return () => clearInterval(interval)
 }, []);
