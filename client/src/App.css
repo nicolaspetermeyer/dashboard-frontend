@@ -15,6 +15,19 @@ ul {
   list-style: none;
 }
 
+ul li {
+  display: inline;
+}
+
+ul li a {
+  color: darkblue;
+  margin: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 #button {
   
   width: 24px;
@@ -48,57 +61,47 @@ ul {
   position: center;
 }
 
-.float-child-message {
+
+.column {
+  float: left;
+  padding: 10px;
+}
+
+.message {
   width: 25%;
   float: left;
   padding: 20px;
   border: 3px solid black;
+  height: 1200px;
+  overflow: scroll
 }
 
-.float-child-image {
+.livepicture {
+  margin: auto;
+  width: 65%;
+}
+
+.favorite {
   margin: auto;
   float: center;
 }
 
-.float-child-container {
-  margin: auto;
-  width: 75%;
-  float: right;
-  padding-left: 20px;
+.favorite-image {
+  padding: 6px 6px;
 }
 
-.player {
-  width: 35%;
-  margin: auto;
-  margin-top: 10px;
+
+/* Clear floats after the columns */
+.overview:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
-ul li {
-  display: inline;
+.order li {
+  list-style: none;
 }
-
-ul li a {
-  color: darkblue;
-  margin: 10px;
+.order li:after {
+  content: "\A";
+  white-space: pre;
 }
-
-.stream {
-  margin: 10px;
-  border: #000000 1px solid;
-}
-
-/* .favorite-image {
-  width: 640px;
-  height: 320px;
-}
-
-latest-image {
-  width: 640px;
-  height: 320px;
-}
-
-.new-image {
-  float: right;
-  width: 640px;
-  height: 320px;
-} */
