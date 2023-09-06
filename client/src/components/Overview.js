@@ -5,6 +5,8 @@ import MessageFeed from "./MessageFeed";
 const Overview = () => {
   const [favorites, setFavorites] = useState([]);
   const [latestImageUrl, setLatestImageUrl] = useState("");
+  const [open, setOPen] = useState(false);
+  const [isButtonVisible, setIsButtonVisible] = useState(true);
 
   const containerStyles = {
     display: "flex",
@@ -63,6 +65,31 @@ const Overview = () => {
     }
   };
 
+  // Get the button:
+let mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+
+const toggle = () => {
+  setIsButtonVisible(!isButtonVisible);
+  setOPen(!open);
+};
+
   useEffect(() => {
     fetchFavorite();
     fetchLatestImage();
@@ -112,17 +139,25 @@ const Overview = () => {
             )}
       <div className="column favorite">
           <h2>Favoriten</h2>
-        {favorites.map((favorite) => (
+          {isButtonVisible ? (
+          <button onClick={toggle}>Anzeigen</button>
+          ) : (
+            <button onClick={toggle}>Ausblenden</button>
+          )}
+        {open && (
+        <div>
+        {favorites.reverse().map((favorite) => (
           <img
             key={favorite.id}
             src={favorite.url}
             alt={`Favorite ${favorite.id}`}
             className="favorite-image"
           />
-        ))}
+        ))}</div>)}
       </div>
       </div>
       </div>
+      <button onClick={topFunction} id="myBtn" title="Go to top">^</button>
     </div>
   );
 };

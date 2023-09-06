@@ -83,15 +83,12 @@ const Home = () => {
         <p>Loading...</p>
       ) : (
         <div>
-            {/* <div className ="Buttons">
-            <button onClick={handleReload}>Reload ImageSlider</button>
-              </div> */}
-        <div className="float-child-message">
+        <div className="column message">
         
           <MessageFeed></MessageFeed>
           
         </div>
-        <div className="float-child-image" style={containerStyles}>
+        <div className="column float-child-image" style={containerStyles}>
 
             <ImageSlider slides={slides} />
             
