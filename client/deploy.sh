@@ -1,13 +1,11 @@
-echo "Switching to branch master"
-git checkout master
+echo "Delete current build"
+sudo rm -r /var/www/html/*
 
-echo "Building app..."
+echo "Build current version"
 npm run build
 
 echo "Deploying files to server..."
-scp -r build/* ubuntu@172.23.4.80:~/
-
-# /var/www/172.23.4.80/
+sudo mv build/* /var/www/html/
 
 echo "Done!"
     

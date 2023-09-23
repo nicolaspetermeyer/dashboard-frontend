@@ -38,26 +38,7 @@ const Home = () => {
   return (
     <div className="float-container">
       
-      {/* <button
-            onClick={() => {
-              droneGetCoordinates()
-                .then((coordinates) => {
-                  if (Object.keys(coordinates).length === 0) {
-                    console.error("Did not receive a success message.");
-                  } else {
-                    console.log("Received the new coordinates:", coordinates);
-                    // Here, you can perform further actions with the received coordinates.
-                  }
-                })
-                .catch((error) => {
-                  console.error("Error:", error);
-                });
-            }}
-            title="Picture"
-            color="blue"
-          >
-            Get Coordinates
-          </button>
+      {/* 
           <button
             onClick={() => {
               websocketRequest()

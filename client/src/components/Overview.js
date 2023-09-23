@@ -104,38 +104,15 @@ const toggle = () => {
 
   return (
     <div>      
-      <table> 
-      <h5>Befehle:</h5>
-        <tr><td>
-          <ul className="order">
-            <li>Starte Drohne</li>
-            <li>Frage nach Informationen x bei Personengruppe y</li>
-            <li>Informiere Personengruppe x über Situation</li>
-          </ul>
-        </td><td>
-            <ul className="order">
-              <li>Erstelle Nahaufnahme</li>
-              <li>Drohnen Koordinaten</li>
-              <li>Personengruppe x wegweisen</li>
-            </ul>
-        </td><td>
-            <ul className="order">
-              <li>Starte Suche auf Wasser</li>
-              <li>Identifiziere Person</li>
-              <li>Breche Suche ab</li>
-            </ul>
-        </td></tr>
-      </table>
     <div className="overview" style = {containerStyles}>
       <div className="column message">
       <button onClick={clearFavorites}>Delete All Favorites(!)</button>
-
-        <MessageFeed></MessageFeed>
+          <MessageFeed></MessageFeed>
       </div>
       <div className="column livepicture">
           <h2>Aktuelles Bild</h2>
             {latestImageUrl && (
-            <img src={latestImageUrl}/>
+            <img src={latestImageUrl} alt = "newest img"/>
             )}
       <div className="column favorite">
           <h2>Favoriten</h2>

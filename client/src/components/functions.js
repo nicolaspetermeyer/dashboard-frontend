@@ -104,7 +104,7 @@ function droneGetCoordinates() {
   // Prepare WebSocket connection
   const url = "ws://172.23.4.80:8766";
   const dictData = {
-    sender: "FRONTEND",
+    sender: "PYTHON",
     to: "DRONE",
     type: "get",
     method: "getCoordinates",
