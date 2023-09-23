@@ -3,7 +3,6 @@ import "./App.css";
 import { Routes, Route, Link } from "react-router-dom";
 import Home from "./components/Home";
 import Overview from "./components/Overview";
-import Map from "./components/Map";
 import { Navbar } from "react-bootstrap";
 
 const App = () => {
@@ -18,14 +17,11 @@ const App = () => {
           style={{ height: 80 }}
         >
           <ul>
-            <li>
+            {/* <li>
               <Link to="/">Home</Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/overview">Overview</Link>
-            </li>
-            <li>
-              <Link to="/map">Map</Link>
             </li>
           </ul>
         </Navbar>
@@ -33,7 +29,6 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/overview" element={<Overview />} />
-        <Route path="/map" element={<Map />} />
       </Routes>
     </div>
   );

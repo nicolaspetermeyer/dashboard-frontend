@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
 import MessageFeed from "./MessageFeed";
+import GoogleMaps from "./GoogleMaps";
+import { droneGetCoordinates } from "./functions";
+
 
 const Overview = () => {
   const [favorites, setFavorites] = useState([]);
   const [latestImageUrl, setLatestImageUrl] = useState("");
   const [open, setOPen] = useState(false);
   const [isButtonVisible, setIsButtonVisible] = useState(true);
-
+  const [coordinates, setCoordinates] = React.useState(null);
+  var test = 1.2
   const containerStyles = {
     display: "flex",
     flexDirection: "row",
@@ -25,7 +29,6 @@ const Overview = () => {
       if (latestEntry && latestEntry._id) {
         const transformedUrl = `${publicFolderPath}${latestEntry._id}`;
         setLatestImageUrl(transformedUrl);
-        console.log("test:" + transformedUrl)
       }
     } catch (error) {
       console.error('Error fetching latest image:', error);
@@ -54,7 +57,7 @@ const Overview = () => {
           'Content-Type': 'application/json',
         },
       });
-  
+
       if (response.ok) {
         setFavorites([]); // Clear the messages locally
       } else {
@@ -66,73 +69,107 @@ const Overview = () => {
   };
 
   // Get the button:
-let mybutton = document.getElementById("myBtn");
+  let mybutton = document.getElementById("myBtn");
 
-// When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() {scrollFunction()};
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function () { scrollFunction() };
 
-function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    mybutton.style.display = "block";
-  } else {
-    mybutton.style.display = "none";
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
   }
-}
 
-// When the user clicks on the button, scroll to the top of the document
-function topFunction() {
-  document.body.scrollTop = 0; // For Safari
-  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-}
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
 
-const toggle = () => {
-  setIsButtonVisible(!isButtonVisible);
-  setOPen(!open);
-};
+  const toggle = () => {
+    setIsButtonVisible(!isButtonVisible);
+    setOPen(!open);
+  };
+
+  const fetchDroneCoordinates = async () => {
+    try {
+      const data = await droneGetCoordinates();
+      setCoordinates(data); // Set the coordinates in the state
+    } catch (error) {
+      console.error("Error fetching drone coordinates:", error);
+    }
+  };
+  if (coordinates) {
+    var long = coordinates.long
+    var lat = coordinates.lat;
+  }
 
   useEffect(() => {
     fetchFavorite();
     fetchLatestImage();
+    fetchDroneCoordinates();
 
-    const intervalId = setInterval(() => {
+    const imageInterval = setInterval(() => {
       fetchFavorite();
       fetchLatestImage();
     }, 3000);
-    
-    return () => clearInterval(intervalId);
+
+    const coordinatesInterval = setInterval(fetchDroneCoordinates, 10000);
+
+    return () => {
+      clearInterval(imageInterval);
+      clearInterval(coordinatesInterval)
+    }
   }, []);
 
+  // useEffect(() => {
+  //   const intervalId = setInterval(fetchDroneCoordinates, 10000); // 10 seconds
+  //   fetchDroneCoordinates(); // Initial fetch
+  //   return () => clearInterval(intervalId); // Cleanup the interval on unmount
+  // }, []);
+
   return (
-    <div>      
-    <div className="overview" style = {containerStyles}>
-      <div className="column message">
-      <button onClick={clearFavorites}>Delete All Favorites(!)</button>
+    <div>
+      <div className="overview" style={containerStyles}>
+        <div className="column message">
+          <button onClick={clearFavorites}>Delete All Favorites(!)</button>
           <MessageFeed></MessageFeed>
-      </div>
-      <div className="column livepicture">
+        </div>
+        <div className="column livepicture">
           <h2>Aktuelles Bild</h2>
-            {latestImageUrl && (
-            <img src={latestImageUrl} alt = "newest img"/>
-            )}
-      <div className="column favorite">
-          <h2>Favoriten</h2>
-          {isButtonVisible ? (
-          <button onClick={toggle}>Anzeigen</button>
-          ) : (
-            <button onClick={toggle}>Ausblenden</button>
+          {latestImageUrl && (
+            <img src={latestImageUrl} alt="newest img" />
           )}
-        {open && (
-        <div>
-        {favorites.reverse().map((favorite) => (
-          <img
-            key={favorite.id}
-            src={favorite.url}
-            alt={`Favorite ${favorite.id}`}
-            className="favorite-image"
-          />
-        ))}</div>)}
-      </div>
-      </div>
+
+          <h2>Map</h2>
+          <div className="googleMap">
+            <GoogleMaps latitude={lat} longitude={long} />
+            <h6>Koordinaten<br /><br />
+              Latitude: {lat}<br /><br />
+              Longitude: {long}</h6>
+          </div>
+
+          <div className="column favorite">
+            <h2>Favoriten</h2>
+            {isButtonVisible ? (
+              <button onClick={toggle}>Anzeigen</button>
+            ) : (
+              <button onClick={toggle}>Ausblenden</button>
+            )}
+            {open && (
+              <div>
+                {favorites.reverse().map((favorite) => (
+                  <img
+                    key={favorite.id}
+                    src={favorite.url}
+                    alt={`Favorite ${favorite.id}`}
+                    className="favorite-image"
+                  />
+                ))}</div>)}
+          </div>
+        </div>
       </div>
       <button onClick={topFunction} id="myBtn" title="Go to top">^</button>
     </div>
