@@ -11,7 +11,7 @@ const Overview = () => {
   const [open, setOPen] = useState(false);
   const [isButtonVisible, setIsButtonVisible] = useState(true);
   const [coordinates, setCoordinates] = React.useState(null);
-  var test = 1.2
+
   const containerStyles = {
     display: "flex",
     flexDirection: "row",

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const GoogleMaps = ({ latitude, longitude }) => {
   const coordinates = `${latitude},${longitude}`;
@@ -10,8 +10,9 @@ const GoogleMaps = ({ latitude, longitude }) => {
 
   return (
     <iframe
-      width="500"
-      height="300"
+      title="GoogleMap"
+      width="600"
+      height="350"
       frameborder="0"
       style={{ border: 0 }}
       src={mapUrl}
